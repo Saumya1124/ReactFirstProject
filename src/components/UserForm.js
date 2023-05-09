@@ -1,6 +1,9 @@
+import React from 'react';
 import { useState } from 'react'
 import './UserForm.css'
 import UserDetails from './UserDetails';
+import Wrapper from './Wrapper';
+import Modal from './Modal';
 const UserForm = ()=> {
 
     const [userName , setUserName] = useState('');
@@ -41,7 +44,7 @@ const UserForm = ()=> {
 
 
     return (
-        <div>
+        <React.Fragment>
             <div className="user-form">
                 <form className='col-lg-4 col-md-6 col-12' onSubmit={userData}>
                         <div className='form-input '>
@@ -61,7 +64,7 @@ const UserForm = ()=> {
                 </form>
             </div>
             {/* Empty input Modal */}
-            <div className={`modal ${!valid ? 'invalid' : ''}`}>
+            {/* <div className={`modal ${!valid ? 'invalid' : ''}`}>
                   <div className='modal-form col-lg-6 col-md-6 col-sm-8 col-12'>
                        <div className='header'>
                               <h4>Invalid Entry</h4>
@@ -75,9 +78,11 @@ const UserForm = ()=> {
                             <button onClick={closeModal}>Cancel</button>
                        </div>
                   </div>
-            </div>
+            </div> */}
+            <Modal message='enter valid username and age' closeModal={closeModal} valid = {valid}></Modal>
+            <Modal message='enter valid age' closeModal={closeModalAge} valid = {validAge}></Modal>
             {/* Age Modal */}
-            <div className={`modal ${!validAge ? 'invalid' : ''}`}>
+            {/* <div className={`modal ${!validAge ? 'invalid' : ''}`}>
                   <div className='modal-form col-lg-6 col-md-6 col-sm-8 col-12'>
                        <div className='header'>
                               <h4>Invalid Entry</h4>
@@ -91,13 +96,13 @@ const UserForm = ()=> {
                             <button onClick={closeModalAge}>Cancel</button>
                        </div>
                   </div>
-            </div>
+            </div> */}
 
             <br />
             
             <UserDetails data = {newData}></UserDetails>
 
-        </div>
+        </React.Fragment>
 
     )
 }
