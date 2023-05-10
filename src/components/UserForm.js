@@ -1,13 +1,18 @@
 import React from 'react';
-import { useState } from 'react'
+import { useState , useRef} from 'react'
 import './UserForm.css'
 import UserDetails from './UserDetails';
 import Wrapper from './Wrapper';
 import Modal from './Modal';
 const UserForm = ()=> {
 
-    const [userName , setUserName] = useState('');
-    const [age, setAge] = useState('');
+
+
+    const nameInputRef = useRef();
+    const ageInputRef = useRef();
+    const collegeInputRef = useRef();
+
+    
     const [newData , setNewData] = useState([]);
     const [valid , setValid] = useState(true);
     const [validAge , setValidAge] = useState(true);
@@ -15,6 +20,11 @@ const UserForm = ()=> {
 
     const userData = (e)=> {
         e.preventDefault()
+
+        const userName = nameInputRef.current.value;
+        const age = ageInputRef.current.value;
+        const college = collegeInputRef.current.value;
+        
         if(userName.trim().length == 0 | age.trim().length == 0){
             return setValid(false)
         }
@@ -22,11 +32,14 @@ const UserForm = ()=> {
             return setValidAge(false)
         }
         console.log(userName,age)
-        // const newData = {name: userName , age: age}
-        setNewData([...newData,{name: userName , age: age}])
+        setNewData([...newData,{name: userName , age: age , college : college }])
 
-        setUserName('')
-        setAge('')
+        nameInputRef.current.value = '';
+        ageInputRef.current.value = '';
+        collegeInputRef.current.value = '';
+
+        
+        
     }
 
 
@@ -51,11 +64,14 @@ const UserForm = ()=> {
                             <br />
                             <label>UserName</label>
                             {/* <br /> */}
-                            <input type="text" value={userName}onChange={(event)=>setUserName(event.target.value)}></input>
+                            <input type="text"  ref={nameInputRef}></input>
                             <br />
                             <label>Age</label>
                             {/* <br /> */}
-                            <input type="text" value={age} onChange={(event)=>setAge(event.target.value)}></input>
+                            <input type="text" ref = {ageInputRef}></input>
+                            <br />
+                            <label>College Name</label>
+                            <input type='text' ref={collegeInputRef}></input>
                         </div>
                         <br />
                         <button>Add User</button>

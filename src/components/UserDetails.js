@@ -8,6 +8,7 @@ const UserDetails = (props)=> {
                     <div className='userData col-lg-6 col-md-6 col-12'>
                           <h3>{data.name}</h3>
                           <h3>{data.age}</h3>
+                          <h3>{data.college}</h3>
                     </div>
                  ))}
              
